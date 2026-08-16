@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# install.sh — Install readme-async skill into a project
+# install.sh — Install readme-async skill into a target project
 # Usage: ./scripts/install.sh [target-project-path]
 
 set -euo pipefail
@@ -42,9 +42,28 @@ main() {
     rm -rf "$target_skill_dir"
   fi
 
-  # Copy skill files (excluding scripts/ folder and any install scripts)
+  # Copy skill files (excluding scripts/ folder and any install scripts, node_modules, package-lock.json)
   log "Copying skill files..."
-  rsync -av --exclude='scripts/' --exclude='install.sh' --exclude='install.ps1' "$SKILL_SOURCE_DIR/" "$target_skill_dir/"
+
+  # Use cp instead of rsync for Windows compatibility
+  mkdir -p "$target_skill_dir"
+
+  # Copy all files except excluded ones
+  for item in "$SKILL_SOURCE_DIR"/*; do
+    base=$(basename "$item")
+    case "$base" in
+      scripts|install.sh|install.ps1|install.js|prompt.js|package.json|package-lock.json|node_modules|.git)
+        continue
+        ;;
+      *)
+        cp -r "$item" "$target_skill_dir/"
+        ;;
+    esac
+  done
+
+  # Copy the scripts directory with only the runtime scripts needed by the skill
+  mkdir -p "$target_skill_dir/scripts"
+  cp "$SKILL_SOURCE_DIR/scripts/prompt.js" "$target_skill_dir/scripts/" 2>/dev/null || true
 
   log "Skill installed successfully at $target_skill_dir"
   log ""

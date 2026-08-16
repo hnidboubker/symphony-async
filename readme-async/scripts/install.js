@@ -1,30 +1,21 @@
 #!/usr/bin/env node
-// install.js — Install readme-async skill into a project (Node.js version for npm/npx)
+// install.js — Verify readme-async skill installation in symphony-async project
 
 import {
-  copyFileSync,
-  cpSync,
   existsSync,
-  mkdirSync,
-  readdirSync,
-  rmSync,
   statSync,
+  readFileSync,
 } from 'fs';
-import { dirname, join, relative, resolve } from 'path';
+import { dirname, join, resolve } from 'path';
 import { fileURLToPath } from 'url';
-import { prompt } from './prompt.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 const SKILL_NAME = 'readme-async';
 const SCRIPT_DIR = __dirname;
-
-// The root of the readme-async package itself.
 const SKILL_SOURCE_DIR = resolve(SCRIPT_DIR, '..');
-
-// The project where the skill should be installed.
-const TARGET_DIR = resolve(process.argv[2] || process.cwd());
+const REPO_ROOT = resolve(SKILL_SOURCE_DIR, '..');
 
 const log = (msg) =>
   console.log('\x1b[1;32m[INFO]\x1b[0m', msg);
@@ -35,115 +26,111 @@ const err = (msg) =>
 const warn = (msg) =>
   console.warn('\x1b[1;33m[WARN]\x1b[0m', msg);
 
-/**
- * Returns true if target is the same directory as source
- * or is located somewhere inside source.
- */
-function isInside(source, target) {
-  const relativePath = relative(source, target);
-
-  return (
-    relativePath === '' ||
-    (!relativePath.startsWith('..') && !relativePath.startsWith('/'))
-  );
-}
-
 async function main() {
-  log(`Installing ${SKILL_NAME} skill...`);
-  log(`Source: ${SKILL_SOURCE_DIR}`);
-  log(`Target: ${TARGET_DIR}`);
+  log(`Verifying ${SKILL_NAME} skill installation...`);
+  log(`Repository root: ${REPO_ROOT}`);
+  log(`Skill directory: ${SKILL_SOURCE_DIR}`);
 
-  // Validate target
-  if (!existsSync(TARGET_DIR) || !statSync(TARGET_DIR).isDirectory()) {
-    err(`Target directory not found: ${TARGET_DIR}`);
+  // 1. Verify Node.js is installed
+  try {
+    const { execSync } = await import('child_process');
+    const nodeVersion = execSync('node --version', { encoding: 'utf8' }).trim();
+    log(`✓ Node.js found: ${nodeVersion}`);
+  } catch {
+    err('Node.js is not installed or not in PATH');
     process.exit(1);
   }
 
-  /*
-   * Prevent recursive/self installation.
-   *
-   * This happens when npm install is executed directly inside
-   * the readme-async repository itself, for example in CI:
-   *
-   * /home/runner/work/readme-async/readme-async
-   *
-   * In that case the package source is already the target.
-   */
-  if (isInside(SKILL_SOURCE_DIR, TARGET_DIR)) {
-    log('Target is inside the readme-async package source directory.');
-    log('Skipping self-installation.');
-    return;
+  // 2. Verify npm is installed
+  try {
+    const { execSync } = await import('child_process');
+    const npmVersion = execSync('npm --version', { encoding: 'utf8' }).trim();
+    log(`✓ npm found: ${npmVersion}`);
+  } catch {
+    err('npm is not installed or not in PATH');
+    process.exit(1);
   }
 
-  const skillsDir = join(TARGET_DIR, '.claude', 'skills');
-  const targetSkillDir = join(skillsDir, SKILL_NAME);
-
-  // Create .claude/skills if needed
-  if (!existsSync(skillsDir)) {
-    mkdirSync(skillsDir, { recursive: true });
+  // 3. Verify package.json exists and is valid
+  const packageJsonPath = join(SKILL_SOURCE_DIR, 'package.json');
+  if (!existsSync(packageJsonPath)) {
+    err(`package.json not found at ${packageJsonPath}`);
+    process.exit(1);
   }
 
-  // Check if already installed
-  if (existsSync(targetSkillDir)) {
-    warn(`Skill already installed at ${targetSkillDir}`);
-
-    const answer = await prompt('Overwrite? (y/N) ');
-
-    if (!/^[Yy]$/.test(answer.trim())) {
-      log('Installation cancelled');
-      process.exit(0);
-    }
-
-    rmSync(targetSkillDir, {
-      recursive: true,
-      force: true,
-    });
+  let packageJson;
+  try {
+    packageJson = JSON.parse(readFileSync(packageJsonPath, 'utf8'));
+    log(`✓ package.json valid: ${packageJson.name}@${packageJson.version}`);
+  } catch (e) {
+    err(`Invalid package.json: ${e.message}`);
+    process.exit(1);
   }
 
-  // Copy skill files
-  log('Copying skill files...');
+  // 4. Verify SKILL.md exists
+  const skillMdPath = join(SKILL_SOURCE_DIR, 'SKILL.md');
+  if (!existsSync(skillMdPath)) {
+    err(`SKILL.md not found at ${skillMdPath}`);
+    process.exit(1);
+  }
+  log('✓ SKILL.md found');
 
-  const exclude = new Set([
-    'scripts',
-    'install.sh',
-    'install.ps1',
-    'install.js',
-    'prompt.js',
-    'package.json',
-    'package-lock.json',
-    'node_modules',
-  ]);
+  // 5. Verify references/CONTEXT.md exists
+  const contextMdPath = join(SKILL_SOURCE_DIR, 'references', 'CONTEXT.md');
+  if (!existsSync(contextMdPath)) {
+    warn(`references/CONTEXT.md not found at ${contextMdPath}`);
+  } else {
+    log('✓ references/CONTEXT.md found');
+  }
 
-  for (const entry of readdirSync(SKILL_SOURCE_DIR, {
-    withFileTypes: true,
-  })) {
-    if (exclude.has(entry.name)) {
-      continue;
-    }
+  // 6. Verify scripts directory exists
+  const scriptsDir = join(SKILL_SOURCE_DIR, 'scripts');
+  if (!existsSync(scriptsDir) || !statSync(scriptsDir).isDirectory()) {
+    err(`scripts directory not found at ${scriptsDir}`);
+    process.exit(1);
+  }
+  log('✓ scripts directory found');
 
-    const src = join(SKILL_SOURCE_DIR, entry.name);
-    const dest = join(targetSkillDir, entry.name);
-
-    if (entry.isDirectory()) {
-      cpSync(src, dest, {
-        recursive: true,
-      });
+  // 7. Verify install scripts exist
+  const requiredScripts = ['install.js', 'install.sh', 'install.ps1', 'prompt.js'];
+  for (const script of requiredScripts) {
+    const scriptPath = join(scriptsDir, script);
+    if (!existsSync(scriptPath)) {
+      warn(`Script not found: ${script}`);
     } else {
-      mkdirSync(targetSkillDir, {
-        recursive: true,
-      });
-
-      copyFileSync(src, dest);
+      log(`✓ ${script} found`);
     }
   }
 
-  log(`Skill installed successfully at ${targetSkillDir}`);
+  // 8. Check if dependencies are installed (node_modules)
+  const nodeModulesPath = join(SKILL_SOURCE_DIR, 'node_modules');
+  if (!existsSync(nodeModulesPath)) {
+    warn('Dependencies not installed. Run "npm install" in the readme-async directory.');
+  } else {
+    log('✓ Dependencies installed (node_modules found)');
+  }
+
+  // 9. Verify the skill is properly registered in the symphony-async structure
+  const symphonySkillDir = join(REPO_ROOT, '.claude', 'skills', SKILL_NAME);
+  if (existsSync(symphonySkillDir)) {
+    log(`✓ Skill registered in symphony-async at ${symphonySkillDir}`);
+  } else {
+    log('');
+    log('Note: Skill is not yet registered in symphony-async/.claude/skills/');
+    log('To register, run:');
+    log('  bash scripts/install.sh');
+    log('  or: pwsh scripts/install.ps1');
+  }
+
   log('');
-  log('To use the skill, run:');
+  log('=== Verification Complete ===');
+  log('');
+  log('To use the skill in this project:');
   log('  /skill readme-async');
   log('');
-  log('Or add to your CLAUDE.md:');
-  log('  - readme-async: Keep README.md synchronized with codebase');
+  log('To install this skill into another project:');
+  log('  npx readme-async [target-project-path]');
+  log('  or: bash scripts/install.sh [target-project-path]');
 }
 
 main().catch((e) => {

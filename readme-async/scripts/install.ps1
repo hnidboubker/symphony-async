@@ -1,6 +1,6 @@
 <#
 .SYNOPSIS
-    Install readme-async skill into a project
+    Install readme-async skill into a target project
 
 .DESCRIPTION
     Copies the readme-async skill to the target project's .claude/skills directory
@@ -53,10 +53,15 @@ if (Test-Path -Path $TargetSkillDir -PathType Container) {
     Remove-Item -Path $TargetSkillDir -Recurse -Force
 }
 
-# Copy skill files (excluding scripts/ folder and any install scripts)
+# Copy skill files (excluding scripts/ folder, install scripts, package files, node_modules, and .git)
 Write-Host "[INFO] Copying skill files..." -ForegroundColor Green
-$exclude = @('scripts', 'install.sh', 'install.ps1')
+$exclude = @('scripts', 'install.sh', 'install.ps1', 'install.js', 'prompt.js', 'package.json', 'package-lock.json', 'node_modules', '.git')
 Get-ChildItem -Path $SkillSourceDir | Where-Object { $exclude -notcontains $_.Name } | Copy-Item -Destination $TargetSkillDir -Recurse -Force
+
+# Copy the scripts directory with only the runtime scripts needed by the skill
+$TargetScriptsDir = Join-Path $TargetSkillDir "scripts"
+New-Item -ItemType Directory -Path $TargetScriptsDir -Force | Out-Null
+Copy-Item -Path (Join-Path $SkillSourceDir "scripts\prompt.js") -Destination $TargetScriptsDir -Force -ErrorAction SilentlyContinue
 
 Write-Host "[INFO] Skill installed successfully at $TargetSkillDir" -ForegroundColor Green
 Write-Host ""
