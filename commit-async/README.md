@@ -57,10 +57,10 @@ To prevent accidental data loss or unauthorized changes, `commit-async` adheres 
 - **No Destructive Commands**: Commands like `git reset --hard` or `git push --force` are strictly forbidden.
 - **No Silent Automation**: No action is performed silently; every step is communicated to the user.
 
-## Integration with symphony-async
+## Integration with symphony-orchestrator
 
-`commit-async` is a component of the `symphony-async` orchestration framework. It acts as the entry point for the development lifecycle:
+`commit-async` is a component of the `symphony-orchestrator` orchestration framework. It acts as the entry point for the development lifecycle:
 
-`symphony-async` → **`commit-async`** → `tests-async` → `auto-release` → `readme-async`
+`symphony-orchestrator` → **`commit-async`** → `tests-async` → `auto-release` → `readme-async`
 
 The skill returns a status code (e.g., `COMMIT_CREATED`, `PUSH_COMPLETED`, `NO_CHANGES`) to the orchestrator to trigger the next stage of the pipeline.
