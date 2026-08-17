@@ -12,11 +12,11 @@ By participating in this project, you agree to abide by our commitment to foster
 
 ```bash
 # Fork the repository on GitHub, then clone your fork
-git clone https://github.com/<your-username>/symphony-async.git
-cd symphony-async
+git clone https://github.com/<your-username>/symphony-orchestrator.git
+cd symphony-orchestrator
 
 # Add upstream remote to stay in sync
-git remote add upstream https://github.com/original-owner/symphony-async.git
+git remote add upstream https://github.com/original-owner/symphony-orchestrator.git
 ```
 
 ### 2. Create a Branch

@@ -162,7 +162,7 @@ git push --force
 
 or any destructive variant.
 
-## Integration with symphony-async
+## Integration with symphony-orchestrator
 
 `commit-async` is a specialized skill.
 
@@ -172,12 +172,12 @@ It must not directly invoke:
 * `auto-release`;
 * `readme-async`.
 
-`symphony-async` is responsible for orchestrating the skills.
+`symphony-orchestrator` is responsible for orchestrating the skills.
 
 The expected global flow is:
 
 ```text
-symphony-async
+symphony-orchestrator
       ↓
 commit-async
       ↓

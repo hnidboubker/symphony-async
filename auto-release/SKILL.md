@@ -24,7 +24,7 @@ Generate/update CHANGELOG.md
     ↓
 Create Git tag
     ↓
-Return release result to symphony-async
+Return release result to symphony-orchestrator
 ```
 
 It must not directly invoke:
@@ -32,7 +32,7 @@ It must not directly invoke:
 * `commit-async`;
 * `tests-async`;
 * `readme-async`;
-* `symphony-async`.
+* `symphony-orchestrator`.
 
 The orchestrator decides what happens next.
 
@@ -345,7 +345,7 @@ release created locally
     ↓
 return result
     ↓
-symphony-async decides whether/when to push
+symphony-orchestrator decides whether/when to push
 ```
 
 Never execute:
@@ -424,7 +424,7 @@ If the changelog must be committed, return:
 CHANGELOG_UPDATED
 ```
 
-to `symphony-async`.
+to `symphony-orchestrator`.
 
 The orchestrator can then use `commit-async` to create the documentation commit according to the normal validation rules.
 
@@ -477,7 +477,7 @@ changelog_updated: true
 The expected integration is:
 
 ```text
-                    symphony-async
+                    symphony-orchestrator
                           │
                           ▼
                     commit-async
@@ -538,7 +538,7 @@ It must not trigger:
 commit-async
 tests-async
 readme-async
-symphony-async
+symphony-orchestrator
 ```
 
 The orchestrator controls the cascade.
@@ -592,7 +592,7 @@ It does NOT:
 
 ## Usage
 
-Called by `symphony-async` after successful tests and push:
+Called by `symphony-orchestrator` after successful tests and push:
 
 ```bash
 python auto-release/scripts/release.py

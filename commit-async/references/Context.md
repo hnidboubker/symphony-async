@@ -4,12 +4,12 @@
 
 The `commit-async` skill automates the complete Git commit workflow with explicit user approval at each critical step. It analyzes changes, proposes Conventional Commit messages, and ensures no action is taken without user consent.
 
-## Role within symphony-async
+## Role within symphony-orchestrator
 
-`commit-async` is a specialized skill in the `symphony-async` orchestration pipeline. It sits at the beginning of the flow:
+`commit-async` is a specialized skill in the `symphony-orchestrator` orchestration pipeline. It sits at the beginning of the flow:
 
 ```text
-symphony-async
+symphony-orchestrator
       ↓
 commit-async
       ↓
@@ -20,7 +20,7 @@ auto-release
 readme-async
 ```
 
-The skill does not directly invoke other skills. It returns its result state to the orchestrator (`symphony-async`), which then decides the next step.
+The skill does not directly invoke other skills. It returns its result state to the orchestrator (`symphony-orchestrator`), which then decides the next step.
 
 ## Workflow
 
@@ -111,7 +111,7 @@ The skill must never:
 
 ## Contracts with Other Skills
 
-`commit-async` returns one of these states to `symphony-async`:
+`commit-async` returns one of these states to `symphony-orchestrator`:
 - `COMMIT_CREATED` - Commit made, ready for next skill
 - `PUSH_COMPLETED` - Full workflow complete
 - `NO_CHANGES` - Nothing to do, stop pipeline
@@ -120,4 +120,4 @@ The skill must never:
 - `COMMIT_FAILED` - Error during commit
 - `PUSH_FAILED` - Error during push
 
-The orchestrator (`symphony-async`) handles transitions to `tests-async`, `auto-release`, `readme-async` based on these states.
+The orchestrator (`symphony-orchestrator`) handles transitions to `tests-async`, `auto-release`, `readme-async` based on these states.
