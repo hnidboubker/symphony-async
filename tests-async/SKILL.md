@@ -31,6 +31,15 @@ Its responsibility is to determine which testing workflow should be used, orches
                     PASS / FAIL
                           │
                           ▼
+                 ┌────────┴────────┐
+                 │                 │
+                 ▼                 ▼
+         test-fixer-async    (if FAIL)
+                 │
+                 ▼
+            PASS / FAIL
+                          │
+                          ▼
                     symphony-async
 ```
 
@@ -385,7 +394,8 @@ A failing test is a signal that must be reported.
 It may delegate to:
 
 - `tdd-async`;
-- `bdd-async`.
+- `bdd-async`;
+- `test-fixer-async`.
 
 The orchestrator hierarchy is:
 
@@ -397,6 +407,12 @@ tests-async
 tdd-async / bdd-async
         ↓
 TUnit
+        ↓
+PASS / FAIL
+        ↓
+test-fixer-async (if FAIL)
+        ↓
+PASS / FAIL
 ```
 
 `symphony-async` remains the top-level orchestrator.

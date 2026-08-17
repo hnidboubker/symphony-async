@@ -52,6 +52,15 @@ It does **not** implement TDD or BDD. It:
 - Test discovery: inspect `*.sln`, `*.slnx`, `*.csproj` for TUnit projects
 - Do not assume test project naming conventions
 
+## Relationship with test-fixer-async
+
+- `test-fixer-async` automatically diagnoses and fixes failing async C#/.NET tests
+- Uses iterative loop: Run tests → Analyze failure → Identify root cause → Apply minimal fix → Run tests again
+- Returns: `TEST_FIXER_STARTED` / `TEST_FIXER_COMPLETED` / `TESTS_FAILED` (if unfixable)
+- `tests-async` delegates to it when:
+  - Tests fail after `tdd-async`, `bdd-async`, or `tests-async` execution
+  - Need to fix root cause without weakening assertions or hiding failures
+
 ## Strategy Selection
 
 ### Prefer BDD When
