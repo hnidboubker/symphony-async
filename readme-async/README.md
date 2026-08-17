@@ -32,9 +32,9 @@ Validate Consistency
 
 ## Installation
 
-### Within symphony-orchestrator
+### Within symphony-async
 
-The skill is part of the `symphony-orchestrator` project. To verify the environment is ready:
+The skill is part of the `symphony-async` project. To verify the environment is ready:
 
 - **Bash**: `bash readme-async/scripts/install.sh`
 - **PowerShell**: `pwsh readme-async/scripts/install.ps1`
@@ -62,11 +62,11 @@ To prevent accidental data loss or unauthorized changes, `readme-async` adheres 
 - **Minimal Changes**: Only updates what is necessary; never rewrites the entire README unless required.
 - **No Silent Automation**: Every step is communicated; no action is performed silently.
 
-## Integration with symphony-orchestrator
+## Integration with symphony-async
 
-`readme-async` is a component of the `symphony-orchestrator` orchestration framework. It acts as the final stage in the development lifecycle:
+`readme-async` is a component of the `symphony-async` orchestration framework. It acts as the final stage in the development lifecycle:
 
-`symphony-orchestrator` → `commit-async` → `tests-async` → `auto-release` → **`readme-async`**
+`symphony-async` → `commit-async` → `tests-async` → `auto-release` → **`readme-async`**
 
 The skill returns a status to the orchestrator to indicate whether documentation updates were made.
 
@@ -83,7 +83,7 @@ The skill uses the following configuration files:
 
 - Node.js >= 18.0.0 (for npm/npx distribution and standalone use)
 - Git (required for change detection)
-- No external dependencies when used within symphony-orchestrator (uses shell scripts)
+- No external dependencies when used within symphony-async (uses shell scripts)
 
 ## Supported Project Types
 
