@@ -1,10 +1,10 @@
-# Symphony Async
+# Symphony Orchestrator
 
-Symphony Async is a top-level orchestrator for a complete development workflow. It coordinates specialized skills to create a controlled, deterministic, and approval-aware development pipeline.
+Symphony Orchestrator is a top-level orchestrator for a complete development workflow. It coordinates specialized skills to create a controlled, deterministic, and approval-aware development pipeline.
 
 ## Orchestration Philosophy
 
-Symphony Async does **not** implement the specialized responsibilities itself. Instead, it orchestrates independent skills, each with a single responsibility:
+Symphony Orchestrator does **not** implement the specialized responsibilities itself. Instead, it orchestrates independent skills, each with a single responsibility:
 
 | Skill | Responsibility |
 |-------|----------------|
@@ -18,7 +18,7 @@ Symphony Async does **not** implement the specialized responsibilities itself. I
 ## The Complete Cascade
 
 ```
-                    Symphony Async
+                    Symphony Orchestrator
                           │
                           ▼
                     tests-async
@@ -63,7 +63,7 @@ Symphony Async does **not** implement the specialized responsibilities itself. I
 - Destructive or remote operations
 - Release tag pushing (when applicable)
 
-Symphony Async **never** simulates, assumes, or automatically answers approval prompts.
+Symphony Orchestrator **never** simulates, assumes, or automatically answers approval prompts.
 
 ## Loop Prevention
 
@@ -106,18 +106,18 @@ From the repository root:
 
 ```bash
 # Invoke the orchestrator
-symphony-async
+symphony-orchestrator
 ```
 
 Or via Python:
 
 ```bash
-python symphony-async/scripts/symphony.py
+python symphony-orchestrator/scripts/symphony.py
 ```
 
 ## Global States
 
-Symphony Async communicates through explicit machine-readable states:
+Symphony Orchestrator communicates through explicit machine-readable states:
 
 | State | Meaning |
 |-------|---------|
@@ -145,7 +145,7 @@ readme-async:       README_UNCHANGED | README_UPDATED | README_BLOCKED | README_
 
 ## Security
 
-Symphony Async never executes:
+Symphony Orchestrator never executes:
 - `git reset --hard`
 - `git clean -fd`
 - `git push --force`

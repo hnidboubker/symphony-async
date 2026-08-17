@@ -77,13 +77,13 @@ def check_git_repo() -> tuple[bool, str]:
 def check_symphony_structure(repo_root: str) -> bool:
     """Verify Symphony directory structure exists."""
     print("Checking Symphony structure...")
-    symphony_dir = Path(repo_root) / "symphony-async"
+    symphony_dir = Path(repo_root) / "symphony-orchestrator"
     all_ok = True
 
     if symphony_dir.is_dir():
-        success("symphony-async directory exists")
+        success("symphony-orchestrator directory exists")
     else:
-        error(f"symphony-async directory not found at {symphony_dir}")
+        error(f"symphony-orchestrator directory not found at {symphony_dir}")
         return False
 
     # Check required subdirectories
@@ -122,19 +122,9 @@ def check_expected_skills(repo_root: str) -> bool:
     skills_dir = Path(repo_root)
     all_ok = True
 
-    expected_skills = ("commit-async", "tests-async", "auto-release", "readme-async")
-    expected_sub_skills = ("tests-async/tdd-async", "tests-async/bdd-async")
+    expected_skills = ("commit-async", "tests-async", "tdd-async", "bdd-async", "test-fixer-async", "auto-release", "readme-async")
 
     for skill in expected_skills:
-        skill_path = skills_dir / skill
-        skill_file = skill_path / "SKILL.md"
-        if skill_path.is_dir() and skill_file.is_file():
-            success(f"  {skill} exists")
-        else:
-            error(f"  {skill} missing or incomplete")
-            all_ok = False
-
-    for skill in expected_sub_skills:
         skill_path = skills_dir / skill
         skill_file = skill_path / "SKILL.md"
         if skill_path.is_dir() and skill_file.is_file():
@@ -147,7 +137,7 @@ def check_expected_skills(repo_root: str) -> bool:
 
 
 def main() -> int:
-    print("=== Symphony Async Installer ===")
+    print("=== Symphony Orchestrator Installer ===")
     print("")
 
     all_ok = True
@@ -178,7 +168,7 @@ def main() -> int:
     print("")
     print("=== Installation Summary ===")
     if all_ok:
-        success("All verifications passed. Symphony Async is ready.")
+        success("All verifications passed. Symphony Orchestrator is ready.")
         return 0
     else:
         error("Some verifications failed. Please resolve the issues above.")

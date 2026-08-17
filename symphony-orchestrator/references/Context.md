@@ -1,10 +1,10 @@
-# Symphony Async Context
+# Symphony Orchestrator Context
 
-This document provides comprehensive context for the Symphony Async orchestrator and its integration with specialized skills.
+This document provides comprehensive context for the Symphony Orchestrator orchestrator and its integration with specialized skills.
 
 ## Symphony's Role
 
-Symphony Async is the **top-level orchestrator** of the complete development workflow. It coordinates but does not replace specialized skills.
+Symphony Orchestrator is the **top-level orchestrator** of the complete development workflow. It coordinates but does not replace specialized skills.
 
 ### Responsibilities:
 - Detect changes in the repository

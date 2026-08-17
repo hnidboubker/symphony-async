@@ -1,17 +1,17 @@
 ---
-name: symphony-async
+name: symphony-orchestrator
 description: Orchestrates the complete development workflow by coordinating commit, TDD, BDD, testing, release, and documentation skills.
 ---
 
-# symphony-async
+# symphony-orchestrator
 
-**symphony-async** is the TOP-LEVEL ORCHESTRATOR of the entire development workflow.
+**symphony-orchestrator** is the TOP-LEVEL ORCHESTRATOR of the entire development workflow.
 
 It coordinates specialized skills but does not replace their responsibilities.
 
 ## Objective
 
-`symphony-async` orchestrates the complete development lifecycle:
+`symphony-orchestrator` orchestrates the complete development lifecycle:
 
 ```
 Change
@@ -42,14 +42,14 @@ The specialized skills are:
 - `auto-release`
 - `readme-async`
 
-`symphony-async` is the only skill responsible for coordinating the complete workflow.
+`symphony-orchestrator` is the only skill responsible for coordinating the complete workflow.
 
 ## Required Structure
 
 Create or update:
 
 ```
-symphony-async/
+symphony-orchestrator/
 ├── references/
 │   └── Context.md
 ├── scripts/
@@ -118,7 +118,7 @@ The workflow is a controlled cascade.
 
 Each skill has ONE responsibility.
 
-`symphony-async` orchestrates.
+`symphony-orchestrator` orchestrates.
 
 `tests-async` orchestrates testing.
 
@@ -132,7 +132,7 @@ Each skill has ONE responsibility.
 
 `readme-async` handles README synchronization.
 
-Do not duplicate these responsibilities inside `symphony-async`.
+Do not duplicate these responsibilities inside `symphony-orchestrator`.
 
 ## Workflow
 
@@ -316,7 +316,7 @@ Invoke:
 6. asking for push approval;
 7. pushing the commit.
 
-`symphony-async` must NOT bypass these approvals.
+`symphony-orchestrator` must NOT bypass these approvals.
 
 Do not create commits directly.
 
@@ -381,7 +381,7 @@ After a successful push, invoke:
 5. create the Git tag;
 6. return the release result.
 
-`symphony-async` must not calculate versions itself.
+`symphony-orchestrator` must not calculate versions itself.
 
 Do not use npm.
 
@@ -450,7 +450,7 @@ Invoke:
 
 Its responsibility is to determine whether the README needs updating.
 
-Do not edit README.md directly from `symphony-async`.
+Do not edit README.md directly from `symphony-orchestrator`.
 
 Possible results:
 
@@ -692,7 +692,7 @@ may produce no release depending on the project's release policy.
 
 ## Conventional Commits
 
-`symphony-async` does not generate commit messages itself.
+`symphony-orchestrator` does not generate commit messages itself.
 
 Delegate this to:
 
@@ -742,7 +742,7 @@ Never continue after a failed quality gate.
 
 ## Skill Contracts
 
-`symphony-async` must communicate with skills through explicit results.
+`symphony-orchestrator` must communicate with skills through explicit results.
 
 Expected contracts:
 
@@ -791,7 +791,7 @@ README_FAILED
 
 Specialized skills must remain independent.
 
-`symphony-async` must not:
+`symphony-orchestrator` must not:
 
 - implement TDD;
 - implement BDD;

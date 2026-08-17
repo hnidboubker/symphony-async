@@ -239,9 +239,9 @@ It must not directly invoke:
 - `bdd-async`;
 - `auto-release`;
 - `readme-async`;
-- `symphony-async`.
+- `symphony-orchestrator`.
 
-`symphony-async` is responsible for orchestration.
+`symphony-orchestrator` is responsible for orchestration.
 
 When used by Symphony, return a clear result.
 

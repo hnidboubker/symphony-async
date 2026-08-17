@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-# symphony-async installer for Linux/macOS
+# symphony-orchestrator installer for Linux/macOS
 # Verifies the environment and Symphony structure
 
 set -euo pipefail
 
-echo "=== Symphony Async Installer ==="
+echo "=== Symphony Orchestrator Installer ==="
 echo ""
 
 # Colors for output
@@ -61,12 +61,12 @@ fi
 
 # 4. Verify Symphony structure
 echo "Checking Symphony structure..."
-SYMPHONY_DIR="$REPO_ROOT/symphony-async"
+SYMPHONY_DIR="$REPO_ROOT/symphony-orchestrator"
 
 if [[ -d "$SYMPHONY_DIR" ]]; then
-    success "symphony-async directory exists"
+    success "symphony-orchestrator directory exists"
 else
-    error "symphony-async directory not found at $SYMPHONY_DIR"
+    error "symphony-orchestrator directory not found at $SYMPHONY_DIR"
     ALL_OK=false
 fi
 
@@ -103,19 +103,9 @@ done
 # 5. Verify expected skills exist
 echo "Checking expected skills..."
 SKILLS_DIR="$REPO_ROOT"
-EXPECTED_SKILLS=("commit-async" "tests-async" "auto-release" "readme-async")
-EXPECTED_SUB_SKILLS=("tests-async/tdd-async" "tests-async/bdd-async")
+EXPECTED_SKILLS=("commit-async" "tests-async" "tdd-async" "bdd-async" "test-fixer-async" "auto-release" "readme-async")
 
 for skill in "${EXPECTED_SKILLS[@]}"; do
-    if [[ -d "$SKILLS_DIR/$skill" ]] && [[ -f "$SKILLS_DIR/$skill/SKILL.md" ]]; then
-        success "  $skill exists"
-    else
-        error "  $skill missing or incomplete"
-        ALL_OK=false
-    fi
-done
-
-for skill in "${EXPECTED_SUB_SKILLS[@]}"; do
     if [[ -d "$SKILLS_DIR/$skill" ]] && [[ -f "$SKILLS_DIR/$skill/SKILL.md" ]]; then
         success "  $skill exists"
     else
@@ -128,7 +118,7 @@ done
 echo ""
 echo "=== Installation Summary ==="
 if [[ "$ALL_OK" == true ]]; then
-    success "All verifications passed. Symphony Async is ready."
+    success "All verifications passed. Symphony Orchestrator is ready."
     exit 0
 else
     error "Some verifications failed. Please resolve the issues above."

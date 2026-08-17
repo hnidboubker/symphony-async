@@ -171,7 +171,7 @@ Each scenario must be independent and deterministic. Do not depend on: execution
 
 ## Symphony Integration
 
-`bdd-async` is an independent skill. It must not directly invoke: `commit-async`, `tdd-async`, `auto-release`, `readme-async`, `symphony-async`. `symphony-async` controls the orchestration.
+`bdd-async` is an independent skill. It must not directly invoke: `commit-async`, `tdd-async`, `auto-release`, `readme-async`, `symphony-orchestrator`. `symphony-orchestrator` controls the orchestration.
 
 When used by Symphony, return:
 

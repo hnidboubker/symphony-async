@@ -1,10 +1,10 @@
 <#
 .SYNOPSIS
-    Symphony Async installer for Windows PowerShell
+    Symphony Orchestrator installer for Windows PowerShell
     Verifies the environment and Symphony structure
 #>
 
-Write-Host "=== Symphony Async Installer ===" -ForegroundColor Cyan
+Write-Host "=== Symphony Orchestrator Installer ===" -ForegroundColor Cyan
 Write-Host ""
 
 $allOk = $true
@@ -57,12 +57,12 @@ try {
 
 # 4. Verify Symphony structure
 Write-Host "Checking Symphony structure..."
-$symphonyDir = Join-Path $repoRoot "symphony-async"
+$symphonyDir = Join-Path $repoRoot "symphony-orchestrator"
 
 if (Test-Path $symphonyDir -PathType Container) {
-    Success "symphony-async directory exists"
+    Success "symphony-orchestrator directory exists"
 } else {
-    Error "symphony-async directory not found at $symphonyDir"
+    Error "symphony-orchestrator directory not found at $symphonyDir"
 }
 
 # Check required subdirectories
@@ -101,22 +101,9 @@ foreach ($script in $scripts) {
 # 5. Verify expected skills exist
 Write-Host "Checking expected skills..."
 $skillsDir = $repoRoot
-$expectedSkills = @("commit-async", "tests-async", "auto-release", "readme-async")
-$expectedSubSkills = @("tests-async/tdd-async", "tests-async/bdd-async")
+$expectedSkills = @("commit-async", "tests-async", "tdd-async", "bdd-async", "test-fixer-async", "auto-release", "readme-async")
 
 foreach ($skill in $expectedSkills) {
-    $skillPath = Join-Path $skillsDir $skill
-    $skillFile = Join-Path $skillPath "SKILL.md"
-    $dirOk = Test-Path $skillPath -PathType Container
-    $fileOk = Test-Path $skillFile -PathType Leaf
-    if ($dirOk -and $fileOk) {
-        Success "  $skill exists"
-    } else {
-        Error "  $skill missing or incomplete"
-    }
-}
-
-foreach ($skill in $expectedSubSkills) {
     $skillPath = Join-Path $skillsDir $skill
     $skillFile = Join-Path $skillPath "SKILL.md"
     $dirOk = Test-Path $skillPath -PathType Container
@@ -132,7 +119,7 @@ foreach ($skill in $expectedSubSkills) {
 Write-Host ""
 Write-Host "=== Installation Summary ===" -ForegroundColor Cyan
 if ($allOk) {
-    Success "All verifications passed. Symphony Async is ready."
+    Success "All verifications passed. Symphony Orchestrator is ready."
     exit 0
 } else {
     Error "Some verifications failed. Please resolve the issues above."
