@@ -150,7 +150,7 @@ The TDD tests should provide the appropriate lower-level implementation coverage
 
 ## Delegation
 
-Do not recreate the logic of `tdd-async` or `bdd-async`.
+Do not recreate the logic of `tdd-async`, `bdd-async`, or `test-fixer-async`.
 
 When TDD is selected:
 
@@ -163,6 +163,12 @@ When BDD is selected:
 Invoke:
 
 `bdd-async`
+
+When tests fail after `tdd-async`, `bdd-async`, or `tests-async`:
+
+Invoke:
+
+`test-fixer-async`
 
 The specialized skill owns its own workflow.
 
@@ -249,9 +255,15 @@ Include:
 - failing tests;
 - relevant error information.
 
-Do not continue to release.
+Invoke `test-fixer-async` to attempt automatic diagnosis and repair.
 
-The Symphony pipeline must stop.
+If `test-fixer-async` succeeds:
+- Return `TESTS_PASSED` with fix details.
+
+If `test-fixer-async` cannot resolve:
+- Return `TESTS_FAILED` with blocker details.
+- Do not continue to release.
+- The Symphony pipeline must stop.
 
 ## Success Handling
 
@@ -286,6 +298,8 @@ Possible states:
 - `TESTS_PASSED`
 - `TESTS_FAILED`
 - `TESTS_BLOCKED`
+- `TEST_FIXER_STARTED`
+- `TEST_FIXER_COMPLETED`
 
 Example:
 
