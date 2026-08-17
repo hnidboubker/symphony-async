@@ -9,9 +9,9 @@ Write-Host ""
 
 $allOk = $true
 
-function Success($msg) { Write-Host "✓ $msg" -ForegroundColor Green }
-function Error($msg) { Write-Host "✗ $msg" -ForegroundColor Red; $global:allOk = $false }
-function Warn($msg) { Write-Host "⚠ $msg" -ForegroundColor Yellow }
+function Success($msg) { Write-Host "[OK] $msg" -ForegroundColor Green }
+function Error($msg) { Write-Host "[ERROR] $msg" -ForegroundColor Red; $global:allOk = $false }
+function Warn($msg) { Write-Host "[WARN] $msg" -ForegroundColor Yellow }
 
 # 1. Verify Git
 Write-Host "Checking Git..."
@@ -90,7 +90,7 @@ foreach ($file in $files) {
 # Check install scripts
 $scripts = @("install.sh", "install.ps1", "install.py")
 foreach ($script in $scripts) {
-    $path = Join-Path $symphonyDir "scripts" $script
+    $path = Join-Path (Join-Path $symphonyDir "scripts") $script
     if (Test-Path $path -PathType Leaf) {
         Success "  scripts/$script exists"
     } else {
@@ -107,7 +107,9 @@ $expectedSubSkills = @("tests-async/tdd-async", "tests-async/bdd-async")
 foreach ($skill in $expectedSkills) {
     $skillPath = Join-Path $skillsDir $skill
     $skillFile = Join-Path $skillPath "SKILL.md"
-    if (Test-Path $skillPath -PathType Container -and Test-Path $skillFile -PathType Leaf) {
+    $dirOk = Test-Path $skillPath -PathType Container
+    $fileOk = Test-Path $skillFile -PathType Leaf
+    if ($dirOk -and $fileOk) {
         Success "  $skill exists"
     } else {
         Error "  $skill missing or incomplete"
@@ -117,7 +119,9 @@ foreach ($skill in $expectedSkills) {
 foreach ($skill in $expectedSubSkills) {
     $skillPath = Join-Path $skillsDir $skill
     $skillFile = Join-Path $skillPath "SKILL.md"
-    if (Test-Path $skillPath -PathType Container -and Test-Path $skillFile -PathType Leaf) {
+    $dirOk = Test-Path $skillPath -PathType Container
+    $fileOk = Test-Path $skillFile -PathType Leaf
+    if ($dirOk -and $fileOk) {
         Success "  $skill exists"
     } else {
         Error "  $skill missing or incomplete"

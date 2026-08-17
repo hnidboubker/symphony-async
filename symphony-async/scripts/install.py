@@ -12,15 +12,15 @@ from pathlib import Path
 
 
 def success(msg: str) -> None:
-    print(f"\033[0;32m✓\033[0m {msg}")
+    print(f"[OK] {msg}")
 
 
 def error(msg: str) -> None:
-    print(f"\033[0;31m✗\033[0m {msg}")
+    print(f"[ERROR] {msg}")
 
 
 def warn(msg: str) -> None:
-    print(f"\033[1;33m⚠\033[0m {msg}")
+    print(f"[WARN] {msg}")
 
 
 def run_command(cmd: list[str]) -> tuple[int, str]:
