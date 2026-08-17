@@ -82,7 +82,7 @@ done
 # Verify delegated skills exist (at root level)
 echo
 echo "Verifying delegated skills..."
-DELEGATED_SKILLS=("tdd-async" "bdd-async")
+DELEGATED_SKILLS=("tdd-async" "bdd-async" "test-fixer-async")
 for skill in "${DELEGATED_SKILLS[@]}"; do
     if [ -d "$REPO_ROOT/$skill" ]; then
         echo "✅ $skill"

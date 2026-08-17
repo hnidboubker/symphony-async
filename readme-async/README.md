@@ -83,7 +83,7 @@ The skill uses the following configuration files:
 
 - Node.js >= 18.0.0 (for npm/npx distribution and standalone use)
 - Git (required for change detection)
-- No external dependencies when used within symphony-async (uses shell scripts)
+- No external dependencies when used within symphony-orchestrator (uses shell scripts)
 
 ## Supported Project Types
 

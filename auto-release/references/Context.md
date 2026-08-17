@@ -24,7 +24,7 @@ symphony-orchestrator (orchestrator)
 4. **Calculate next version** - Apply semantic versioning rules
 5. **Generate/update CHANGELOG.md** - Create structured changelog entries
 6. **Create Git tag** - Create annotated release tag locally
-7. **Return results** - Machine-readable output for symphony-async
+7. **Return results** - Machine-readable output for symphony-orchestrator
 
 ## Constraints
 

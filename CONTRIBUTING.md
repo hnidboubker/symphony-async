@@ -242,7 +242,7 @@ Releases are managed by `auto-release` based on Conventional Commits:
 
 - Check existing issues and PRs for similar questions
 - Review skill documentation (each skill has its own README.md)
-- Read the main `symphony-async/SKILL.md` for orchestration details
+- Read the main `symphony-orchestrator/SKILL.md` for orchestration details
 - Open a new issue for bugs or feature requests
 
 ## Recognition

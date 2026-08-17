@@ -18,20 +18,20 @@ def main():
     if not git_version:
         print("ERROR: Git is not installed or not in PATH")
         sys.exit(1)
-    print(f"✓ Git found: {git_version}")
+    print(f"[OK] Git found: {git_version}")
 
     # 2. Verify current directory is a Git repository
     if run_command("git rev-parse --git-dir") is None:
         print("ERROR: Current directory is not a Git repository")
         sys.exit(1)
-    print("✓ Current directory is a Git repository")
+    print("[OK] Current directory is a Git repository")
 
     # 3. Display repository root
     repo_root = run_command("git rev-parse --show-toplevel")
     if not repo_root:
         print("ERROR: Could not determine repository root")
         sys.exit(1)
-    print(f"✓ Repository root: {repo_root}")
+    print(f"[OK] Repository root: {repo_root}")
 
     # 4. Verify skill can be used
     skill_dir = os.path.join(repo_root, "commit-async")
@@ -44,7 +44,7 @@ def main():
         print(f"ERROR: SKILL.md not found in commit-async directory")
         sys.exit(1)
 
-    print("✓ commit-async skill structure verified")
+    print("[OK] commit-async skill structure verified")
 
     # 5. No external dependencies to install
     print()
