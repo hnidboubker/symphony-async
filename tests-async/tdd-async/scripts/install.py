@@ -30,20 +30,27 @@ def print_header(title: str):
     print(f"{'=' * 40}")
 
 
+# Use ASCII-safe markers to avoid encoding issues on Windows
+CHECK = "[OK]"
+CROSS = "[X]"
+WARN = "[!]"
+INFO = "[i]"
+
+
 def print_success(msg: str):
-    print(f"✅ {msg}")
+    print(f"{CHECK} {msg}")
 
 
 def print_error(msg: str):
-    print(f"❌ {msg}")
+    print(f"{CROSS} {msg}")
 
 
 def print_warning(msg: str):
-    print(f"⚠️  {msg}")
+    print(f"{WARN} {msg}")
 
 
 def print_info(msg: str):
-    print(f"ℹ️  {msg}")
+    print(f"{INFO} {msg}")
 
 
 def check_git() -> bool:
