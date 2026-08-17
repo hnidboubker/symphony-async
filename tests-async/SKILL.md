@@ -9,12 +9,12 @@ description: Orchestrates TDD and BDD testing workflows using TUnit and coordina
 
 It does not implement TDD or BDD itself.
 
-Its responsibility is to determine which testing workflow should be used, orchestrate the appropriate specialized skill, execute the required test validation, and return a clear result to `symphony-async`.
+Its responsibility is to determine which testing workflow should be used, orchestrate the appropriate specialized skill, execute the required test validation, and return a clear result to `symphony-orchestrator`.
 
 ## Architecture
 
 ```
-                    symphony-async
+                    symphony-orchestrator
                           │
                           ▼
                      tests-async
@@ -40,7 +40,7 @@ Its responsibility is to determine which testing workflow should be used, orches
             PASS / FAIL
                           │
                           ▼
-                    symphony-async
+                    symphony-orchestrator
 ```
 
 ## Core Responsibility
@@ -295,7 +295,7 @@ Include:
 
 ## Symphony Contract
 
-`tests-async` must communicate a clear contract to `symphony-async`.
+`tests-async` must communicate a clear contract to `symphony-orchestrator`.
 
 Possible states:
 
@@ -386,7 +386,7 @@ A failing test is a signal that must be reported.
 
 `tests-async` must NOT invoke:
 
-- `symphony-async`;
+- `symphony-orchestrator`;
 - `commit-async`;
 - `auto-release`;
 - `readme-async`.
@@ -400,7 +400,7 @@ It may delegate to:
 The orchestrator hierarchy is:
 
 ```
-symphony-async
+symphony-orchestrator
         ↓
 tests-async
         ↓
@@ -415,7 +415,7 @@ test-fixer-async (if FAIL)
 PASS / FAIL
 ```
 
-`symphony-async` remains the top-level orchestrator.
+`symphony-orchestrator` remains the top-level orchestrator.
 
 ## Release Gate
 
@@ -459,7 +459,7 @@ then:
 ALLOW_RELEASE
 ```
 
-Return the result to `symphony-async`.
+Return the result to `symphony-orchestrator`.
 
 ## Cascade Safety
 
@@ -470,7 +470,7 @@ Never do:
 ```
 tests-async
     ↓
-symphony-async
+symphony-orchestrator
     ↓
 tests-async
     ↓
@@ -483,7 +483,7 @@ Never invoke `auto-release` directly.
 
 Never invoke `readme-async` directly.
 
-The top-level orchestration remains the responsibility of `symphony-async`.
+The top-level orchestration remains the responsibility of `symphony-orchestrator`.
 
 ## Important Constraints
 

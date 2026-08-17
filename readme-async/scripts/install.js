@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// install.js — Verify readme-async skill installation in symphony-async project
+// install.js — Verify readme-async skill installation in symphony-orchestrator project
 
 import {
   existsSync,
@@ -110,13 +110,13 @@ async function main() {
     log('✓ Dependencies installed (node_modules found)');
   }
 
-  // 9. Verify the skill is properly registered in the symphony-async structure
+  // 9. Verify the skill is properly registered in the symphony-orchestrator structure
   const symphonySkillDir = join(REPO_ROOT, '.claude', 'skills', SKILL_NAME);
   if (existsSync(symphonySkillDir)) {
-    log(`✓ Skill registered in symphony-async at ${symphonySkillDir}`);
+    log(`✓ Skill registered in symphony-orchestrator at ${symphonySkillDir}`);
   } else {
     log('');
-    log('Note: Skill is not yet registered in symphony-async/.claude/skills/');
+    log('Note: Skill is not yet registered in symphony-orchestrator/.claude/skills/');
     log('To register, run:');
     log('  bash scripts/install.sh');
     log('  or: pwsh scripts/install.ps1');

@@ -8,10 +8,10 @@ This skill enforces a strict TDD workflow (Red → Green → Refactor) when impl
 
 ## Usage
 
-The skill is typically invoked by the `symphony-async` orchestrator as part of the development pipeline:
+The skill is typically invoked by the `symphony-orchestrator` orchestrator as part of the development pipeline:
 
 ```text
-symphony-async
+symphony-orchestrator
       ↓
 tdd-async (this skill)
       ↓

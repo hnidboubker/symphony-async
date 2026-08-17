@@ -26,6 +26,8 @@ if ! git rev-parse --git-dir &> /dev/null; then
 fi
 echo "✅ Inside a Git repository"
 
+REPO_ROOT=$(git rev-parse --show-toplevel)
+
 # Check for .NET SDK
 if ! command -v dotnet &> /dev/null; then
     echo "❌ .NET SDK is not installed or not in PATH"
@@ -77,12 +79,12 @@ for file in "${REQUIRED_FILES[@]}"; do
     fi
 done
 
-# Verify delegated skills exist
+# Verify delegated skills exist (at root level)
 echo
 echo "Verifying delegated skills..."
 DELEGATED_SKILLS=("tdd-async" "bdd-async")
 for skill in "${DELEGATED_SKILLS[@]}"; do
-    if [ -d "$SKILL_DIR/$skill" ]; then
+    if [ -d "$REPO_ROOT/$skill" ]; then
         echo "✅ $skill"
     else
         echo "⚠️  Missing delegated skill: $skill"

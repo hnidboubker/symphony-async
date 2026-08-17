@@ -2,10 +2,10 @@
 
 ## Role
 
-`tests-async` is the **test orchestrator** for the Symphony Async ecosystem. It sits between `symphony-async` (top-level orchestrator) and the specialized testing skills (`tdd-async`, `bdd-async`).
+`tests-async` is the **test orchestrator** for the Symphony Async ecosystem. It sits between `symphony-orchestrator` (top-level orchestrator) and the specialized testing skills (`tdd-async`, `bdd-async`).
 
 ```
-symphony-async
+symphony-orchestrator
       ↓
 tests-async     ← ORCHESTRATOR
       ↓
@@ -21,7 +21,7 @@ It does **not** implement TDD or BDD. It:
 4. Invokes the appropriate specialized skill
 5. Executes TUnit tests
 6. Validates results
-7. Returns PASS/FAIL to `symphony-async`
+7. Returns PASS/FAIL to `symphony-orchestrator`
 
 ## Relationship with tdd-async
 
@@ -214,7 +214,7 @@ Never:
 ## Symphony Integration
 
 ### Must NOT Invoke
-- `symphony-async`
+- `symphony-orchestrator`
 - `commit-async`
 - `auto-release`
 - `readme-async`
@@ -225,7 +225,7 @@ Never:
 
 ### Orchestrator Hierarchy
 ```
-symphony-async (top)
+symphony-orchestrator (top)
       ↓
 tests-async (test gate)
       ↓
@@ -254,13 +254,13 @@ If `TESTS_PASSED` → `ALLOW_RELEASE`
 
 **Forbidden:**
 ```
-tests-async → symphony-async → tests-async → ...
+tests-async → symphony-orchestrator → tests-async → ...
 ```
 
 - Never invoke itself
 - Never invoke `auto-release` directly
 - Never invoke `readme-async` directly
-- Top-level orchestration = `symphony-async`
+- Top-level orchestration = `symphony-orchestrator`
 
 ## Constraints
 

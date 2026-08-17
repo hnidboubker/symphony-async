@@ -1,6 +1,6 @@
 # Symphony Async
 
-**Symphony Async** is a modular orchestration system for Claude Code that transforms everyday development tasks into a coordinated, automated workflow. Instead of relying on a single monolithic skill, Symphony is built as a collection of specialized skills that work together like instruments in a symphony—each with a clear responsibility, independently reusable, yet orchestrated by `symphony-async` into a complete development pipeline.
+**Symphony Async** is a modular orchestration system for Claude Code that transforms everyday development tasks into a coordinated, automated workflow. Instead of relying on a single monolithic skill, Symphony is built as a collection of specialized skills that work together like instruments in a symphony—each with a clear responsibility, independently reusable, yet orchestrated by `symphony-orchestrator` into a complete development pipeline.
 
 ## Core Skills
 
@@ -12,7 +12,7 @@
 | **`bdd-async`** | Behavior-Driven Development | Transforms business requirements into executable Given → When → Then tests using TUnit |
 | **`auto-release`** | Release Automation | Analyzes Conventional Commits, determines semantic version, generates CHANGELOG, creates Git tags (Python + Git only) |
 | **`readme-async`** | Documentation Sync | Keeps README synchronized with codebase by detecting discrepancies and making minimal targeted updates |
-| **`symphony-async`** | Orchestration | Top-level orchestrator coordinating the complete workflow with loop prevention and human approval gates |
+| **`symphony-orchestrator`** | Orchestration | Top-level orchestrator coordinating the complete workflow with loop prevention and human approval gates |
 
 ## Architecture
 

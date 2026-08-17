@@ -89,8 +89,8 @@ bash commit-async/scripts/install.sh
 python auto-release/scripts/release.py --dry-run
 
 # If working with .NET skills
-dotnet build tests-async/tdd-async
-dotnet test tests-async/tdd-async
+dotnet build tdd-async
+dotnet test tdd-async
 ```
 
 ### 5. Submit a Pull Request

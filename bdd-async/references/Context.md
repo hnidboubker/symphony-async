@@ -2,7 +2,7 @@
 
 ## Project Scripts
 
-For the `symphony-async` project, use the scripts from `tests-async/tdd-async/scripts/` to bootstrap the test environment.
+For the `symphony-orchestrator` project, use the scripts from `tdd-async/scripts/` to bootstrap the test environment.
 
 ## TUnit
 

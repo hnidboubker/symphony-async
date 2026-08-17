@@ -135,12 +135,12 @@ def verify_skill_structure(skill_dir: Path) -> bool:
 
 
 def verify_delegated_skills(skill_dir: Path) -> bool:
-    """Verify delegated skills exist."""
+    """Verify delegated skills exist at root level."""
     delegated_skills = ["tdd-async", "bdd-async"]
     all_present = True
     print("\nVerifying delegated skills...")
     for skill in delegated_skills:
-        skill_path = skill_dir / skill
+        skill_path = skill_dir.parent / skill
         if skill_path.exists() and skill_path.is_dir():
             print_success(skill)
         else:

@@ -91,12 +91,13 @@ foreach ($file in $requiredFiles) {
     }
 }
 
-# Verify delegated skills exist
+# Verify delegated skills exist (at root level)
 Write-Host ""
 Write-Host "Verifying delegated skills..." -ForegroundColor Cyan
 $delegatedSkills = @("tdd-async", "bdd-async")
+$repoRoot = git rev-parse --show-toplevel 2>&1
 foreach ($skill in $delegatedSkills) {
-    $skillPath = Join-Path $skillDir $skill
+    $skillPath = Join-Path $repoRoot $skill
     if (Test-Path $skillPath -PathType Container) {
         Write-Host "✅ $skill" -ForegroundColor Green
     }

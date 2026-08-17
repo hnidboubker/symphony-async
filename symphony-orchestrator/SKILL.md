@@ -74,7 +74,7 @@ Before modifying anything:
 The architecture is:
 
 ```
-                         symphony-async
+                         symphony-orchestrator
                               │
                               ▼
                          tests-async
@@ -471,7 +471,7 @@ The complete cascade is:
 
 ```
                  ┌──────────────────┐
-                 │ symphony-async   │
+                 │ symphony-orchestrator   │
                  └────────┬─────────┘
                           │
                           ▼

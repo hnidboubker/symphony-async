@@ -20,7 +20,7 @@ Testing strategies (TDD vs BDD) serve different purposes:
 ## Architecture
 
 ```
-                    symphony-async
+                    symphony-orchestrator
                           │
                           ▼
                      tests-async
@@ -35,7 +35,7 @@ Testing strategies (TDD vs BDD) serve different purposes:
                       PASS / FAIL
                            │
                            ▼
-                     symphony-async
+                     symphony-orchestrator
 ```
 
 ## TDD vs BDD
@@ -91,7 +91,7 @@ tests-async orchestrates:
 │   └── bdd-async → Given-When-Then scenarios
 ├── Execute TUnit tests
 ├── Analyze results
-└── Return PASS/FAIL to symphony-async
+└── Return PASS/FAIL to symphony-orchestrator
 ```
 
 ## Symphony Integration
@@ -166,7 +166,7 @@ A failing test is a signal that must be reported.
 No recursive workflows:
 
 ```
-tests-async → symphony-async → tests-async  ❌ FORBIDDEN
+tests-async → symphony-orchestrator → tests-async  ❌ FORBIDDEN
 ```
 
-`symphony-async` remains the top-level orchestrator. `tests-async` never invokes itself, `auto-release`, `commit-async`, or `readme-async`.
+`symphony-orchestrator` remains the top-level orchestrator. `tests-async` never invokes itself, `auto-release`, `commit-async`, or `readme-async`.
