@@ -82,7 +82,7 @@ Before submitting, verify your changes work correctly:
 
 ```bash
 # Run the installer to verify environment
-bash symphony-async/scripts/install.sh
+bash symphony-orchestrator/scripts/install.sh
 
 # Test individual skills
 bash commit-async/scripts/install.sh
@@ -160,7 +160,7 @@ skill-name/
    - Integration points with Symphony
    - Security constraints
 4. Add installation scripts that verify prerequisites
-5. Update the main `symphony-async/SKILL.md` to include the new skill in the orchestration
+5. Update the main `symphony-orchestrator/SKILL.md` to include the new skill in the orchestration
 6. Update this CONTRIBUTING.md if needed
 
 ### Modifying Existing Skills

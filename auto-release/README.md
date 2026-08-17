@@ -2,7 +2,7 @@
 
 ## What is auto-release?
 
-`auto-release` is the release engine used by `symphony-async`. It automates the release process by analyzing Conventional Commits, determining the next semantic version, updating the changelog, and creating Git tags.
+`auto-release` is the release engine used by `symphony-orchestrator`. It automates the release process by analyzing Conventional Commits, determining the next semantic version, updating the changelog, and creating Git tags.
 
 ## What it does
 
@@ -60,7 +60,7 @@ auto-release
 readme-async
 ```
 
-`symphony-async` remains the orchestrator. `auto-release` is called after successful tests and push.
+`symphony-orchestrator` remains the orchestrator. `auto-release` is called after successful tests and push.
 
 ## Installation
 
@@ -76,7 +76,7 @@ readme-async
 
 ## Usage
 
-Called by `symphony-async`:
+Called by `symphony-orchestrator`:
 ```bash
 python auto-release/scripts/release.py
 ```

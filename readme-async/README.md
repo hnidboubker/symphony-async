@@ -32,9 +32,9 @@ Validate Consistency
 
 ## Installation
 
-### Within symphony-async
+### Within symphony-orchestrator
 
-The skill is part of the `symphony-async` project. To verify the environment is ready:
+The skill is part of the `symphony-orchestrator` project. To verify the environment is ready:
 
 - **Bash**: `bash readme-async/scripts/install.sh`
 - **PowerShell**: `pwsh readme-async/scripts/install.ps1`
@@ -62,11 +62,11 @@ To prevent accidental data loss or unauthorized changes, `readme-async` adheres 
 - **Minimal Changes**: Only updates what is necessary; never rewrites the entire README unless required.
 - **No Silent Automation**: Every step is communicated; no action is performed silently.
 
-## Integration with symphony-async
+## Integration with symphony-orchestrator
 
-`readme-async` is a component of the `symphony-async` orchestration framework. It acts as the final stage in the development lifecycle:
+`readme-async` is a component of the `symphony-orchestrator` orchestration framework. It acts as the final stage in the development lifecycle:
 
-`symphony-async` → `commit-async` → `tests-async` → `auto-release` → **`readme-async`**
+`symphony-orchestrator` → `commit-async` → `tests-async` → `auto-release` → **`readme-async`**
 
 The skill returns a status to the orchestrator to indicate whether documentation updates were made.
 

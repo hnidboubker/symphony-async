@@ -1,11 +1,11 @@
 # auto-release Context
 
-This skill is part of the Symphony Async orchestration pipeline. It is responsible for automated release management based on Conventional Commits.
+This skill is part of the Symphony Orchestrator orchestration pipeline. It is responsible for automated release management based on Conventional Commits.
 
 ## Architecture Position
 
 ```
-symphony-async (orchestrator)
+symphony-orchestrator (orchestrator)
     │
     ├── commit-async
     │
