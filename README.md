@@ -66,7 +66,7 @@
 
 > **One project. Multiple skills. One coordinated workflow.**
 
-The goal is not to remove the developer from the process, but to **reduce repetitive work while keeping important decisions under human control**. Every skill is independently reusable, while `symphony-async` provides the orchestration layer that connects them.
+The goal is not to remove the developer from the process, but to **reduce repetitive work while keeping important decisions under human control**. Every skill is independently reusable, while `symphony-orchestrator` provides the orchestration layer that connects them.
 
 ### Human Approval Gates
 
@@ -81,7 +81,11 @@ Symphony Async **never** simulates, assumes, or automatically answers approval p
 ## Project Structure
 
 ```
-symphony-async/
+symphony-orchestrator/     # Top-level orchestrator
+│   ├── scripts/           # install.sh, install.ps1, install.py
+│   ├── references/        # Context.md
+│   ├── SKILL.md
+│   └── README.md
 ├── commit-async/          # Git commit/push workflow with human approvals
 │   ├── scripts/           # install.sh, install.ps1, install.py
 │   ├── references/        # Context.md
@@ -89,18 +93,22 @@ symphony-async/
 │   ├── README.md
 │   └── CONTRIBUTING.md
 ├── tests-async/           # Testing workflow orchestration
-│   ├── bdd-async/         # Behavior-Driven Development skill
-│   │   ├── scripts/
-│   │   ├── references/
-│   │   ├── SKILL.md
-│   │   └── README.md
-│   ├── tdd-async/         # Test-Driven Development skill
-│   │   ├── scripts/
-│   │   ├── references/
-│   │   ├── SKILL.md
-│   │   └── README.md
+│   ├── scripts/
+│   ├── references/
 │   ├── SKILL.md
 │   └── README.md
+├── tdd-async/             # Test-Driven Development skill
+│   ├── scripts/
+│   ├── references/
+│   ├── SKILL.md
+│   └── README.md
+├── bdd-async/             # Behavior-Driven Development skill
+│   ├── scripts/
+│   ├── references/
+│   ├── SKILL.md
+│   └── README.md
+├── test-fixer-async/      # Test fixing skill
+│   ├── SKILL.md
 ├── auto-release/          # Semantic versioning and release automation
 │   ├── scripts/           # release.py, install.sh, install.ps1
 │   ├── references/
@@ -114,11 +122,6 @@ symphony-async/
 │   ├── SKILL.md
 │   ├── CONTRIBUTING.md
 │   └── README.md
-├── symphony-async/        # Top-level orchestrator
-│   ├── scripts/           # install.sh, install.ps1, install.py
-│   ├── references/        # Context.md
-│   ├── SKILL.md
-│   └── README.md
 ├── SECURITY.md            # Security policies and responsible disclosure
 ├── CONTRIBUTING.md        # Contribution guidelines
 ├── LICENSE                # MIT License
@@ -130,7 +133,7 @@ symphony-async/
 ### Prerequisites
 
 - **Git** (required for all skills)
-- **Python 3.8+** (required for `auto-release` and `symphony-async` installer)
+- **Python 3.8+** (required for `auto-release` and `symphony-orchestrator` installer)
 - **.NET SDK 8.0+** (required for `tdd-async` / `bdd-async` / `tests-async` when working with C# projects)
 - **Node.js 18+** (optional, only for standalone `readme-async` distribution via npx)
 
@@ -141,14 +144,14 @@ Each skill is self-contained with its own installation verification scripts:
 ```bash
 # Clone the repository
 git clone <repository-url>
-cd symphony-async
+cd symphony-orchestrator
 
-# Verify symphony-async environment (from repo root)
-bash symphony-async/scripts/install.sh
+# Verify symphony-orchestrator environment (from repo root)
+bash symphony-orchestrator/scripts/install.sh
 # or
-pwsh symphony-async/scripts/install.ps1
+pwsh symphony-orchestrator/scripts/install.ps1
 # or
-python symphony-async/scripts/install.py
+python symphony-orchestrator/scripts/install.py
 ```
 
 The installer verifies:
@@ -164,10 +167,10 @@ From the repository root, invoke the orchestrator:
 
 ```bash
 # Via shell (requires skill to be installed in .claude/skills/)
-symphony-async
+symphony-orchestrator
 
 # Or directly via Python
-python symphony-async/scripts/symphony.py
+python symphony-orchestrator/scripts/symphony.py
 ```
 
 ### Individual Skill Usage

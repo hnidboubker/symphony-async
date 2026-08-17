@@ -32,7 +32,7 @@ Please provide as much detail as possible:
 - **Description** of the vulnerability
 - **Steps to reproduce** the issue
 - **Potential impact** (what could an attacker achieve?)
-- **Affected components/skills** (commit-async, tests-async, auto-release, readme-async, symphony-async)
+- **Affected components/skills** (commit-async, tests-async, auto-release, readme-async, symphony-orchestrator)
 - **Suggested fix** (if you have one)
 - **Your contact information** for follow-up
 
@@ -64,7 +64,7 @@ Symphony Async is designed with security as a first-class concern. Each skill en
 
 ### tests-async / tdd-async / bdd-async
 - **No Test Manipulation**: Never deletes failing tests, weakens assertions, skips tests without justification, hides failures, or modifies tests to match broken implementation
-- **Cascade Safety**: No recursive workflows (`tests-async → symphony-async → tests-async` is forbidden)
+- **Cascade Safety**: No recursive workflows (`tests-async → symphony-orchestrator → tests-async` is forbidden)
 - **Isolated Execution**: Test skills never invoke other Symphony skills directly
 
 ### auto-release
@@ -80,7 +80,7 @@ Symphony Async is designed with security as a first-class concern. Each skill en
 - **Minimal Changes**: Only updates what is necessary; never rewrites entire README unless required
 - **No Silent Automation**: Every step is communicated; no action performed silently
 
-### symphony-async (Orchestrator)
+### symphony-orchestrator (Orchestrator)
 - **No Destructive Git**: Never executes `git reset --hard`, `git clean -fd`, `git push --force`
 - **No User Data Deletion**: Never deletes user changes
 - **No Unrelated File Overwrites**: Never overwrites unrelated files
