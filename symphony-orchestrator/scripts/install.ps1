@@ -10,7 +10,7 @@ Write-Host ""
 $allOk = $true
 
 function Success($msg) { Write-Host "[OK] $msg" -ForegroundColor Green }
-function Error($msg) { Write-Host "[ERROR] $msg" -ForegroundColor Red; $global:allOk = $false }
+function Error($msg) { Write-Host "[ERROR] $msg" -ForegroundColor Red; $script:allOk = $false }
 function Warn($msg) { Write-Host "[WARN] $msg" -ForegroundColor Yellow }
 
 # 1. Verify Git
