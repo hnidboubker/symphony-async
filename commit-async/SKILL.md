@@ -179,9 +179,9 @@ The expected global flow is:
 ```text
 symphony-orchestrator
       ↓
-commit-async
-      ↓
 tests-async
+      ↓
+commit-async
       ↓
 auto-release
       ↓
